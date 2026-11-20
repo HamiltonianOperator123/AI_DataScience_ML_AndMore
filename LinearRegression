@@ -1,0 +1,58 @@
+#Welcome to the LR program
+print(''' Menu:
+1. create new set of datapoints
+2. remove a set of datapoints
+3. Append new values to a set of data points
+4. predict
+5. exit''')
+L={}
+while True:
+  choice = int(input('please enter your choice index:'))
+  if choice == 1:
+    name=input('enter name of the set of datapoints')
+    set=list(input('enter a list of tuples of data points (as in [(x1,y1),(x2,y2)...]):'))
+    L[name]=set
+    print('set of datapoints has been created successfully')
+    continue
+  if choice == 2:
+    print(L)
+    name_to_delete=input('enter the name of the set to remove:')
+    del L[name_to_delete]
+    print('removed successfully')
+    continue
+  if choice == 3:
+    print(L)
+    name_to_append=input('enter name of set to have new values appended:')
+    set2=list(input('enter new datapoints to add (as in [(xi,yi),(xj,yj)]):'))
+    L[name_to_append]=L[name_to_append] + set2
+    print('updated')
+    continue
+  if choice == 5:
+    break
+  if choice == 4:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
