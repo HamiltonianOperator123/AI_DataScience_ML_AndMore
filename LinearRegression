@@ -1,3 +1,5 @@
+import math
+
 #Welcome to the LR program
 print(''' Menu:
 1. create new set of datapoints
@@ -6,32 +8,97 @@ print(''' Menu:
 4. predict
 5. exit''')
 L={}
+
+def sum_of_deviations_squared(list,A,B):
+    sum=0
+    for k in list:
+      sum += (k[1]-A-B*k[0])**2
+      return sum
+
+def sum_of_squares_x(list):
+    sq_sum = 0
+    for i in list:
+      sq_sum += i[0]**2
+      return sq_sum
+
+def def sum_of_squares_y(list):
+    sq_sum = 0
+    for i in list:
+      sq_sum += i[1]**2
+      return sq_sum
+
+def sum_of_x(list):
+    sq_sum = 0
+    for i in list:
+      sq_sum += i[0]
+      return sq_sum
+
+def sum_of_y(list):
+    sq_sum = 0
+    for i in list:
+        sq_sum += i[1]
+        return sq_sum
+
+def sum_of_xy(list):
+    sq_sum = 0
+    for i in list:
+        sq_sum += i[0]*i[1]
+        return sq_sum
+
 while True:
-  choice = int(input('please enter your choice index:'))
-  if choice == 1:
-    name=input('enter name of the set of datapoints')
-    set=list(input('enter a list of tuples of data points (as in [(x1,y1),(x2,y2)...]):'))
-    L[name]=set
-    print('set of datapoints has been created successfully')
-    continue
-  if choice == 2:
-    print(L)
-    name_to_delete=input('enter the name of the set to remove:')
-    del L[name_to_delete]
-    print('removed successfully')
-    continue
-  if choice == 3:
-    print(L)
-    name_to_append=input('enter name of set to have new values appended:')
-    set2=list(input('enter new datapoints to add (as in [(xi,yi),(xj,yj)]):'))
-    L[name_to_append]=L[name_to_append] + set2
-    print('updated')
-    continue
-  if choice == 5:
-    break
-  if choice == 4:
-
-
+    choice = int(input('please enter your choice index:'))
+    if choice == 1:
+        name=input('enter name of the set of datapoints')
+        set=list(input('enter a list of tuples of data points (as in [(x1,y1),(x2,y2)...]):'))
+        L[name]=set
+        print('set of datapoints has been created successfully')
+        continue
+    if choice == 2:
+        print(L)
+        name_to_delete=input('enter the name of the set to remove:')
+        del L[name_to_delete]
+        print('removed successfully')
+        continue
+    if choice == 3:
+        print(L)
+        name_to_append=input('enter name of set to have new values appended:')
+        set2=list(input('enter new datapoints to add (as in [(xi,yi),(xj,yj)]):'))
+        L[name_to_append]=L[name_to_append] + set2
+        print('updated')
+        continue
+    if choice == 5:
+        break
+    if choice == 4:
+        print(L)
+        name_to_predict = input('enter the name of dataset you wish to predict')
+        predset=L[name]
+        delta = len(predset)*(sum_of_squares_x(predset)) - (sum_of_x(predset))**2
+        A = ((sum_of_y(predset))*(sum_of_squares_x(predset)) - (sum_of_x(predset))*(sum_of_xy(predset)))/delta
+        B = (len(predset)*(sum_of_xy(predset)) - (sum_of_x(predset))*(sum_of_y(predset)))/delta
+        unc_y = math.sqrt(sum_of_deviations_squared(predset,A,B)/(len(predset)-2))
+        unc_A = (unc_y)*(sqrt((sum_of_squares_x(predset)/delta)))
+        unc_B = (unc_y)*(sqrt((len(predset)/delta)))
+        print('The best estimate value of offset A =',A)
+        print('The best estimate value of slope B =',B)
+        print('The uncertainity in measurement of ordinate y =',unc_y)
+        print('The uncertainity in A =',unc_A)
+        print('The uncertainity in B =',unc_B)
+    while True:
+        ch2=input(''' choose:
+                    1. predict x for a given y
+                    2. predict y for a given x
+                    3. Escape''')
+        if ch2==1:
+            y=float(input('enter y value:'))
+            x=(y-A)/B
+            print('predicted x is:',x)
+        if ch2==2:
+            x=float(input('enter x value:'))
+            y=A+B*x
+            print('predicted y is:',y)
+        if ch2==3:
+            break
+      
 
 
 
