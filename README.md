@@ -23,8 +23,10 @@ Why do we minimize the squares of deviations and not the modulus of the deviatio
 DERIVATION:
 Let the line which is to be predicted be y=A+Bx (where A is the offset and B is the slope). We basically need to find A and B
 we have a collection of datapoints (x1,y1),(x2,y2)....(xn,yn). Area of a square formed by the point (xi,yi) and the line is given by (yi-A-Bxi)^2
-thus the total area of all squares would be:
-(derivation will be shared soon)
+the derivation is in this pdf:
+[Uploading linear regression derivation.pdf…]()
+
+
 
 
 
